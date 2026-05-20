@@ -505,14 +505,28 @@ function triggerGoogleTranslate(code) {
     var combo = document.querySelector('.goog-te-combo');
     if (combo) {
       if (code === 'en') {
-        // Reset to English: set empty value or pick 'en'
+        // --- Restore to original English ---
+        // GT cannot "translate to English" when pageLanguage is already 'en'.
+        // combo.value='' fires the combo change (works in some GT versions),
+        // then we check if <html> still carries the translated-ltr class.
+        // If it does, we clear the googtrans cookie and reload — the only
+        // 100% reliable way to get back to the original text.
         combo.value = '';
         combo.dispatchEvent(new Event('change'));
-        // Fallback: use GT's own "show original" if available
-        setTimeout(function(){
-          var restoreBtn = document.querySelector('.goog-te-banner-content button, .VIpgJd-ZVi9od-ORHb-OEVmcd button');
-          if (restoreBtn) restoreBtn.click();
-        }, 400);
+        // Try GT internal restore API as well
+        try { if (typeof doGTranslate === 'function') doGTranslate('en|en'); } catch(e) {}
+        // After a short pause, verify the page was actually restored
+        setTimeout(function() {
+          var isStillTranslated = (document.documentElement.className || '').indexOf('translated') !== -1;
+          if (isStillTranslated) {
+            // Force restore: wipe the googtrans cookie, then reload
+            var exp = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+            document.cookie = 'googtrans=; path=/' + exp;
+            document.cookie = 'googtrans=; path=/; domain=' + location.hostname + exp;
+            document.cookie = 'googtrans=; path=/; domain=.' + location.hostname + exp;
+            location.reload();
+          }
+        }, 900);
       } else {
         combo.value = code;
         combo.dispatchEvent(new Event('change'));
