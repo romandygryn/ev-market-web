@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon &mdash; EV Market Europe</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--green:#0B7A3B;--green-d:#085a2b;--green-l:#F4F8F5;--gold:#D6A300;--black:#1E1E1E;--gray:#5a6474;--border:#DDE3EA}
+body{font-family:'Inter',sans-serif;color:var(--black);background:#F7F9FB;min-height:100vh;display:flex;flex-direction:column}
+h1,h2,h3{font-family:'Montserrat',sans-serif}
+
+/* Header */
+header{background:rgba(11,122,59,0.97);padding:0 4%;position:fixed;top:0;left:0;right:0;z-index:200;border-bottom:1px solid rgba(255,255,255,0.12)}
+.hdr{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo-link{text-decoration:none;display:flex;align-items:center}
+
+/* Lang */
+.ls{position:relative}
+.lb{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.38rem 0.7rem;cursor:pointer;display:flex;align-items:center;gap:0.45rem;color:rgba(255,255,255,0.9);font-size:0.78rem;font-weight:700;font-family:'Montserrat',sans-serif;transition:all 0.2s}
+.lb:hover{background:rgba(255,255,255,0.18);border-color:var(--gold)}
+.ldd{display:none;position:absolute;top:calc(100%+8px);right:0;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;min-width:170px;box-shadow:0 8px 32px rgba(0,0,0,0.14);z-index:400}
+.ldd.open{display:block}
+.lo{display:flex;align-items:center;gap:0.7rem;padding:0.62rem 1rem;cursor:pointer;color:var(--black);font-size:0.82rem;font-weight:500;transition:background 0.15s;text-decoration:none;user-select:none}
+.lo:hover{background:var(--green-l);color:var(--green)}
+.lo.active{color:var(--green);background:#e8f4ed;font-weight:700}
+
+/* Main */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:100px 1.5rem 4rem;text-align:center}
+.cs-wrap{max-width:680px;width:100%}
+
+.cs-icon{width:72px;height:72px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:2rem}
+
+.cs-wrap h1{font-size:2.4rem;font-weight:900;color:var(--black);line-height:1.15;margin-bottom:1rem;letter-spacing:-0.025em}
+.cs-wrap h1 em{color:var(--green);font-style:normal}
+
+.cs-wrap .lead{font-size:1.05rem;color:var(--gray);line-height:1.7;margin-bottom:3rem;max-width:520px;margin-left:auto;margin-right:auto}
+
+/* Cards */
+.cs-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:3rem}
+.cs-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.8rem 1.5rem;text-align:left;position:relative;overflow:hidden}
+.cs-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green)}
+.cs-card .card-tag{display:inline-block;font-size:0.65rem;font-weight:800;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:0.1em;padding:0.22rem 0.65rem;border-radius:4px;background:var(--green-l);color:var(--green);margin-bottom:0.9rem}
+.cs-card.gold-tag .card-tag{background:var(--gold);color:#fff}
+.cs-card h3{font-size:1rem;font-weight:700;margin-bottom:0.35rem;color:var(--black)}
+.cs-card p{font-size:0.82rem;color:var(--gray);line-height:1.6;margin-bottom:1rem}
+.cs-card .date{font-size:0.9rem;font-weight:800;font-family:'Montserrat',sans-serif;color:var(--green)}
+.cs-card.gold-tag .date{color:var(--gold)}
+
+/* Progress bar */
+.progress-wrap{margin-bottom:0.5rem}
+.progress-label{display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;font-family:'Montserrat',sans-serif;color:var(--gray);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.45rem}
+.progress-bar{background:#eef2f7;border-radius:99px;height:6px;overflow:hidden}
+.progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),#27ae60);transition:width 1s ease}
+
+/* Contact strip */
+.cs-contact{background:var(--green);border-radius:14px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.cs-contact p{font-size:0.9rem;color:rgba(255,255,255,0.8);margin:0}
+.cs-contact a{color:var(--gold);text-decoration:none;font-weight:700;font-size:0.95rem}
+.cs-contact a:hover{text-decoration:underline}
+
+/* Footer */
+footer{background:#030303;padding:1.25rem 4%;border-top:1px solid #0e0e0e;text-align:center}
+.ft{font-size:0.75rem;color:#2a2a2a}
+
+/* GT */
+.goog-te-banner-frame,.VIpgJd-ZVi9od-ORHb-OEVmcd,.VIpgJd-ZVi9od-l4eHX-hSRGPd,#goog-gt-tt,.goog-te-balloon-frame,.goog-te-spinner-pos{display:none!important;height:0!important;width:0!important;min-height:0!important;overflow:hidden!important}
+body{top:0!important;margin-top:0!important;position:relative!important}
+@media(max-width:600px){.cs-cards{grid-template-columns:1fr}.cs-wrap h1{font-size:1.75rem}.cs-contact{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<div style="position:fixed;left:-9999px;bottom:0;z-index:1;height:auto">
+  <div id="google_translate_element"></div>
+</div>
+<script>
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'en,de,fr,cs,sk,pl,hu,bg,ro,uk,ru',autoDisplay:false},'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo-link" aria-label="EV Market Europe home">
+      <img src="EVME_logo_inverse_green.png" alt="EV Market Europe" style="height:54px;display:block">
+    </a>
+    <div class="ls" id="ls">
+      <button class="lb" onclick="tgLang(event)">
+        <span id="cf">&#127468;&#127463;</span>
+        <span id="cl">EN</span>
+        <span style="font-size:0.58rem;opacity:0.6">&#9660;</span>
+      </button>
+      <div class="ldd" id="ld">
+        <a class="lo active" onclick="sLang('en','&#127468;&#127463;','EN',event)">&#127468;&#127463;&nbsp; English</a>
+        <a class="lo" onclick="sLang('de','&#127465;&#127466;','DE',event)">&#127465;&#127466;&nbsp; Deutsch</a>
+        <a class="lo" onclick="sLang('fr','&#127467;&#127479;','FR',event)">&#127467;&#127479;&nbsp; Fran&ccedil;ais</a>
+        <a class="lo" onclick="sLang('cs','&#127464;&#127487;','CS',event)">&#127464;&#127487;&nbsp; &Ccaron;e&scaron;tina</a>
+        <a class="lo" onclick="sLang('sk','&#127480;&#127472;','SK',event)">&#127480;&#127472;&nbsp; Sloven&ccaron;ina</a>
+        <a class="lo" onclick="sLang('pl','&#127477;&#127473;','PL',event)">&#127477;&#127473;&nbsp; Polski</a>
+        <a class="lo" onclick="sLang('hu','&#127469;&#127482;','HU',event)">&#127469;&#127482;&nbsp; Magyar</a>
+        <a class="lo" onclick="sLang('bg','&#127463;&#127468;','BG',event)">&#127463;&#127468;&nbsp; &#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;</a>
+        <a class="lo" onclick="sLang('ro','&#127479;&#127476;','RO',event)">&#127479;&#127476;&nbsp; Rom&acirc;n&259;</a>
+        <a class="lo" onclick="sLang('uk','&#127482;&#127462;','UK',event)">&#127482;&#127462;&nbsp; &#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1089;&#1100;&#1082;&#1072;</a>
+        <a class="lo" onclick="sLang('ru','&#127479;&#127482;','RU',event)">&#127479;&#127482;&nbsp; &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="cs-wrap">
+    <div class="cs-icon">&#9889;</div>
+
+    <h1>We&rsquo;re Building Something<br><em>Extraordinary</em></h1>
+    <p class="lead">Europe&rsquo;s most advanced EV marketplace is coming to Central &amp; Eastern Europe. Two major milestones are on the horizon &mdash; and we can&rsquo;t wait to share them with you.</p>
+
+    <div class="cs-cards">
+      <div class="cs-card">
+        <span class="card-tag">&#127759; New Website</span>
+        <h3>Full EV Market Europe Platform</h3>
+        <p>Brand hub connecting new &amp; pre-owned EVs across the Czech Republic, Poland, Slovakia and Hungary.</p>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>In development</span><span>31 May 2026</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+        </div>
+        <div class="date">&#128197; 31 May 2026</div>
+      </div>
+
+      <div class="cs-card gold-tag">
+        <span class="card-tag" style="background:#FFF8E1;color:var(--gold)">&#128664; Marketplace</span>
+        <h3>Used EV Marketplace</h3>
+        <p>Certified pre-owned electric vehicles sourced from DACH &amp; Benelux with battery health reports.</p>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>In preparation</span><span>30 Jun 2026</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:44%;background:linear-gradient(90deg,var(--gold),#e6a800)"></div></div>
+        </div>
+        <div class="date">&#128197; 30 June 2026</div>
+      </div>
+    </div>
+
+    <div class="cs-contact">
+      <p>For more information &amp; early access:</p>
+      <a href="mailto:info@ev-market-europe.eu">info@ev-market-europe.eu</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span class="ft">&copy; 2026 EV Market Europe. All rights reserved.</span>
+</footer>
+
+<script>
+var T = {"en": {"services": "Services", "brands": "Brands", "used": "Used EVs", "charging": "Charging", "about": "About", "contact": "Contact", "login": "Login", "cta": "Get in Touch", "markets": "Active markets:"}, "de": {"services": "Dienste", "brands": "Marken", "used": "Gebrauchte EVs", "charging": "Laden", "about": "Über uns", "contact": "Kontakt", "login": "Anmelden", "cta": "Kontaktieren", "markets": "Aktive Märkte:"}, "fr": {"services": "Services", "brands": "Marques", "used": "VE d'Occasion", "charging": "Recharge", "about": "À propos", "contact": "Contact", "login": "Connexion", "cta": "Nous contacter", "markets": "Marchés actifs:"}, "cs": {"services": "Služby", "brands": "Značky", "used": "Ojetá EV", "charging": "Nabíjení", "about": "O nás", "contact": "Kontakt", "login": "Přihlásit", "cta": "Kontaktujte nás", "markets": "Aktivní trhy:"}, "sk": {"services": "Služby", "brands": "Značky", "used": "Ojazdené EV", "charging": "Nabíjanie", "about": "O nás", "contact": "Kontakt", "login": "Prihlásiť", "cta": "Kontaktujte nás", "markets": "Aktívne trhy:"}, "pl": {"services": "Usługi", "brands": "Marki", "used": "Używane EV", "charging": "Ładowanie", "about": "O nas", "contact": "Kontakt", "login": "Logowanie", "cta": "Skontaktuj się", "markets": "Aktywne rynki:"}, "hu": {"services": "Szolgáltatások", "brands": "Márkák", "used": "Használt EV", "charging": "Töltés", "about": "Rólunk", "contact": "Kapcsolat", "login": "Bejelentkezés", "cta": "Kapcsolatfelvétel", "markets": "Aktív piacok:"}, "bg": {"services": "Услуги", "brands": "Марки", "used": "Употребявани EV", "charging": "Зареждане", "about": "За нас", "contact": "Контакт", "login": "Вход", "cta": "Свържете се", "markets": "Активни пазари:"}, "ro": {"services": "Servicii", "brands": "Mărci", "used": "EV Second-Hand", "charging": "Încărcare", "about": "Despre noi", "contact": "Contact", "login": "Autentificare", "cta": "Contactați-ne", "markets": "Piețe active:"}, "uk": {"services": "Послуги", "brands": "Бренди", "used": "Вживані EV", "charging": "Зарядка", "about": "Про нас", "contact": "Контакт", "login": "Вхід", "cta": "Зв'язатися", "markets": "Активні ринки:"}, "ru": {"services": "Услуги", "brands": "Бренды", "used": "Подержанные EV", "charging": "Зарядка", "about": "О нас", "contact": "Контакт", "login": "Войти", "cta": "Связаться", "markets": "Активные рынки:"}};
+var currentLang = 'en';
+function applyNavLang(code){}
+function tgLang(e){e.stopPropagation();document.getElementById('ld').classList.toggle('open');}
+document.addEventListener('click',function(){document.getElementById('ld').classList.remove('open');});
+function sLang(code,flag,label,e){
+  e.stopPropagation();currentLang=code;
+  document.getElementById('cf').innerHTML=flag;
+  document.getElementById('cl').textContent=label;
+  document.getElementById('ld').classList.remove('open');
+  document.querySelectorAll('.lo').forEach(function(o){o.classList.remove('active');});
+  e.currentTarget.classList.add('active');
+  triggerGoogleTranslate(code);
+}
+function triggerGoogleTranslate(code){
+  var a=0;function t(){var c=document.querySelector('.goog-te-combo');if(c){c.value=code==='en'?'':code;c.dispatchEvent(new Event('change'));}else if(a<40){a++;setTimeout(t,200);}}t();
+}
+
+</script>
+</body>
+</html>
